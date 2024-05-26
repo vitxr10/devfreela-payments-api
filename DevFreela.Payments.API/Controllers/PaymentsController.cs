@@ -10,7 +10,6 @@ namespace DevFreela.Payments.API.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
-
         public PaymentsController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
@@ -26,6 +25,6 @@ namespace DevFreela.Payments.API.Controllers
 
             return NoContent();
 
-        }
+         }
     }
 }

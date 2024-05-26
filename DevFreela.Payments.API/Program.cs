@@ -1,4 +1,6 @@
+using DevFreela.Payments.API.Consumers;
 using DevFreela.Payments.API.Services;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IPaymentService, PaymentService>();  
+builder.Services.AddScoped<IPaymentService, PaymentService>(); 
+builder.Services.AddHostedService<ProcessPaymentConsumer>();
+
+builder.Services.AddSingleton<ConnectionFactory>(sp =>
+{
+    return new ConnectionFactory()
+    {
+        HostName = "localhost"
+    };
+});
 
 var app = builder.Build();
 
